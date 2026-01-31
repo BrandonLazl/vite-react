@@ -7,8 +7,10 @@ type Venta = {
   fecha: string
   usuarios: {
     nombre: string
-  }
+  }[]
 }
+
+
 
 export default function Ventas() {
   const [ventas, setVentas] = useState<Venta[]>([])
@@ -46,7 +48,7 @@ export default function Ventas() {
       <tbody>
         {ventas.map(v => (
           <tr key={v.id}>
-            <td>{v.usuarios?.nombre}</td>
+            <td>{v.usuarios[0]?.nombre}</td>
             <td>${v.total}</td>
             <td>{new Date(v.fecha).toLocaleString()}</td>
           </tr>
