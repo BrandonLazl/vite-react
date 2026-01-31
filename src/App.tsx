@@ -5,7 +5,8 @@ import './App.css'
 import Ventas from './Ventas'
 import Usuarios from './Usuarios'
 import Productos from './Productos'
-import DetalleVenta from './DetalleVenta'
+import DetalleVenta from './DetalleVenta.tsx'
+
 
 
 function App() {
