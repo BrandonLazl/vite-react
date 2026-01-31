@@ -19,7 +19,7 @@ function App() {
     {
       id: 'usuarios',
       title: 'Usuarios',
-      description: 'Listado de todos los usuarios registrados en el sistema.',
+      description: 'Listado de todos los usuarios registrados.',
       component: <Usuarios />
     },
     {
@@ -37,7 +37,7 @@ function App() {
     {
       id: 'detalle-venta',
       title: 'Detalle de Ventas',
-      description: 'Información completa de cada venta, incluyendo productos y cantidades.',
+      description: 'Información completa de cada venta con productos y cantidades.',
       component: <DetalleVenta />
     }
   ]
@@ -47,17 +47,26 @@ function App() {
   }
 
   return (
-    <div style={{ backgroundColor: '#fff', minHeight: '100vh', fontFamily: 'sans-serif', padding: '2rem' }}>
-      {/* Título Bienvenido */}
+    <div
+      style={{
+        backgroundColor: '#fff',
+        minHeight: '100vh',
+        fontFamily: 'sans-serif',
+        padding: '2rem'
+      }}
+    >
+      {/* Bienvenido arriba */}
       <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Bienvenido</h1>
 
       {/* Tarjetas */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: '1rem',
-        marginBottom: '2rem'
-      }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '1rem',
+          marginBottom: '2rem'
+        }}
+      >
         {cards.map(card => (
           <div
             key={card.id}
@@ -69,7 +78,7 @@ function App() {
               backgroundColor: '#fff',
               boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
               cursor: 'pointer',
-              transition: 'transform 0.2s, box-shadow 0.2s'
+              transition: 'all 0.2s'
             }}
             onMouseEnter={e => {
               const el = e.currentTarget
@@ -82,8 +91,12 @@ function App() {
               el.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)'
             }}
           >
-            <h2 style={{ margin: '0 0 0.5rem 0' }}>{card.title}</h2>
-            <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>{card.description}</p>
+            <h2 style={{ margin: '0 0 0.5rem 0', fontSize: '1.2rem' }}>
+              {card.title}
+            </h2>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>
+              {card.description}
+            </p>
           </div>
         ))}
       </div>
@@ -92,7 +105,13 @@ function App() {
       <div style={{ transition: 'all 0.4s ease' }}>
         {cards.map(card =>
           openCard === card.id ? (
-            <div key={card.id} style={{ animation: 'fadeIn 0.5s' }}>
+            <div
+              key={card.id}
+              style={{
+                animation: 'fadeIn 0.4s',
+                paddingTop: '1rem'
+              }}
+            >
               {card.component}
             </div>
           ) : null
@@ -106,11 +125,18 @@ function App() {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
           }
-
           body, html, #root {
             background-color: #fff;
             margin: 0;
             padding: 0;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
           }
         `}
       </style>
@@ -119,4 +145,5 @@ function App() {
 }
 
 export default App
+
 
