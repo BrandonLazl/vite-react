@@ -5,6 +5,8 @@ import './App.css'
 import Ventas from './Ventas'
 import Usuarios from './Usuarios'
 import Productos from './Productos'
+import DetalleVenta from './DetalleVenta'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -36,6 +38,11 @@ function App() {
   <h2>Ventas</h2>
   <Ventas />
 </section>
+<section style={{ marginTop: '2rem' }}>
+  <h2>Detalle de ventas</h2>
+  <DetalleVenta />
+</section>
+
 
 
       <div className="card">
