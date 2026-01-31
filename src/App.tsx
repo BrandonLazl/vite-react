@@ -1,112 +1,104 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Ventas from './Ventas'
 import Usuarios from './Usuarios'
 import Productos from './Productos'
 import DetalleVenta from './DetalleVenta'
 
+type Card = {
+  id: string
+  title: string
+  description: string
+  component: JSX.Element
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [openCard, setOpenCard] = useState<string | null>(null)
+
+  const cards: Card[] = [
+    {
+      id: 'usuarios',
+      title: 'Usuarios',
+      description: 'Listado de todos los usuarios registrados en el sistema.',
+      component: <Usuarios />
+    },
+    {
+      id: 'productos',
+      title: 'Productos',
+      description: 'Lista de productos disponibles y sus detalles.',
+      component: <Productos />
+    },
+    {
+      id: 'ventas',
+      title: 'Ventas',
+      description: 'Registro de todas las ventas realizadas.',
+      component: <Ventas />
+    },
+    {
+      id: 'detalle-venta',
+      title: 'Detalle de Ventas',
+      description: 'Información completa de cada venta, incluyendo productos y cantidades.',
+      component: <DetalleVenta />
+    }
+  ]
+
+  const handleCardClick = (id: string) => {
+    setOpenCard(prev => (prev === id ? null : id))
+  }
 
   return (
-    <Router>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{ padding: '2rem', backgroundColor: '#fff', minHeight: '100vh', fontFamily: 'sans-serif' }}>
+      <h1 style={{ marginBottom: '2rem' }}>Bienvenido</h1>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+        {cards.map(card => (
+          <div
+            key={card.id}
+            onClick={() => handleCardClick(card.id)}
+            style={{
+              border: '1px solid #ccc',
+              padding: '1rem',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              backgroundColor: '#fff',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget
+              el.style.transform = 'translateY(-3px)'
+              el.style.boxShadow = '0 4px 10px rgba(0,0,0,0.15)'
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget
+              el.style.transform = 'translateY(0)'
+              el.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)'
+            }}
+          >
+            <h2 style={{ margin: '0 0 0.5rem 0' }}>{card.title}</h2>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>{card.description}</p>
+          </div>
+        ))}
       </div>
-
-      <h1>Vite + React Dashboard</h1>
-
-      {/* Tarjetas de navegación */}
-      <div style={{ display: 'flex', gap: '1rem', margin: '2rem 0' }}>
-        <Link to="/usuarios" style={{ textDecoration: 'none' }}>
-          <div style={{
-            border: '1px solid #ccc',
-            padding: '1rem',
-            width: '150px',
-            textAlign: 'center',
-            cursor: 'pointer'
-          }}>
-            <img src="/usuario.png" alt="Usuarios" width={80} />
-            <p>Usuarios</p>
-          </div>
-        </Link>
-
-        <Link to="/productos" style={{ textDecoration: 'none' }}>
-          <div style={{
-            border: '1px solid #ccc',
-            padding: '1rem',
-            width: '150px',
-            textAlign: 'center',
-            cursor: 'pointer'
-          }}>
-            <img src="/producto.png" alt="Productos" width={80} />
-            <p>Productos</p>
-          </div>
-        </Link>
-
-        <Link to="/ventas" style={{ textDecoration: 'none' }}>
-          <div style={{
-            border: '1px solid #ccc',
-            padding: '1rem',
-            width: '150px',
-            textAlign: 'center',
-            cursor: 'pointer'
-          }}>
-            <img src="/ventas.png" alt="Ventas" width={80} />
-            <p>Ventas</p>
-          </div>
-        </Link>
-
-        <Link to="/detalle-venta" style={{ textDecoration: 'none' }}>
-          <div style={{
-            border: '1px solid #ccc',
-            padding: '1rem',
-            width: '150px',
-            textAlign: 'center',
-            cursor: 'pointer'
-          }}>
-            <img src="/detalle.png" alt="Detalle Venta" width={80} />
-            <p>Detalle Venta</p>
-          </div>
-        </Link>
+      <div style={{ marginTop: '2rem', overflow: 'hidden', transition: 'all 0.4s ease' }}>
+        {cards.map(card =>
+          openCard === card.id ? (
+            <div key={card.id} style={{ animation: 'fadeIn 0.5s' }}>
+              {card.component}
+            </div>
+          ) : null
+        )}
       </div>
-
-      {/* Rutas */}
-      <Routes>
-        <Route path="/usuarios" element={<Usuarios />} />
-        <Route path="/productos" element={<Productos />} />
-        <Route path="/ventas" element={<Ventas />} />
-        <Route path="/detalle-venta" element={<DetalleVenta />} />
-        <Route path="/" element={
-          <div>
-            <p>Selecciona una tarjeta para ver los datos.</p>
-          </div>
-        } />
-      </Routes>
-
-      {/* Contador opcional */}
-      <div className="card" style={{ marginTop: '2rem' }}>
-        <button onClick={() => setCount(count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </Router>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
+    </div>
   )
 }
 
 export default App
+
