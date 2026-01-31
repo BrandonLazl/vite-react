@@ -30,13 +30,12 @@ function App() {
             key={item.id}
             onClick={() => setVistaActiva(item.id)}
             style={{
-              padding: '1.5rem',
-              // Fondo blanco, borde gris suave o azul si está activo
+              padding: '1.5rem',       
               backgroundColor: '#fff',
               border: vistaActiva === item.id ? '2px solid #007bff' : '1px solid #ddd',
               borderRadius: '12px',
               cursor: 'pointer',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.1)', // Sombrita para que resalte sobre el fondo
+              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
               transition: 'all 0.2s ease',
               textAlign: 'center'
             }}
