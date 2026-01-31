@@ -16,8 +16,8 @@ function App() {
   ];
 
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', color: '#333', padding: '2rem' }}>
-      <h1 style={{ color: '#000' }}>Panel de Control</h1>
+    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', color: '#f3f1f1', padding: '2rem' }}>
+      <h1 style={{ color: '#000' }}>Bienvenido</h1>
 
       <div style={{ 
         display: 'grid', 
@@ -51,12 +51,12 @@ function App() {
 
       <section style={{ marginTop: '2rem', backgroundColor: '#f9f9f9', padding: '1rem', borderRadius: '8px' }}>
         {!vistaActiva ? (
-          <p style={{ color: '#666' }}>Selecciona una categoría para ver los datos de Supabase.</p>
+          <p style={{ color: '#dedbdb' }}>Selecciona una boton para ver los datos.</p>
         ) : (
           <div>
              <button 
               onClick={() => setVistaActiva(null)} 
-              style={{ marginBottom: '1rem', backgroundColor: '#666', color: 'white' }}
+              style={{ marginBottom: '1rem', backgroundColor: '#e8e5e5', color: 'white' }}
             >
               ← Volver
             </button>
