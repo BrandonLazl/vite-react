@@ -47,21 +47,29 @@ function App() {
   }
 
   return (
-    <div style={{ padding: '2rem', backgroundColor: '#fff', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-      <h1 style={{ marginBottom: '2rem' }}>Bienvenido</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+    <div style={{ backgroundColor: '#fff', minHeight: '100vh', fontFamily: 'sans-serif', padding: '2rem' }}>
+      {/* Título Bienvenido */}
+      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Bienvenido</h1>
+
+      {/* Tarjetas */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gap: '1rem',
+        marginBottom: '2rem'
+      }}>
         {cards.map(card => (
           <div
             key={card.id}
             onClick={() => handleCardClick(card.id)}
             style={{
               border: '1px solid #ccc',
-              padding: '1rem',
               borderRadius: '8px',
-              cursor: 'pointer',
+              padding: '1rem',
               backgroundColor: '#fff',
               boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-              transition: 'transform 0.2s, box-shadow 0.2s',
+              cursor: 'pointer',
+              transition: 'transform 0.2s, box-shadow 0.2s'
             }}
             onMouseEnter={e => {
               const el = e.currentTarget
@@ -79,7 +87,9 @@ function App() {
           </div>
         ))}
       </div>
-      <div style={{ marginTop: '2rem', overflow: 'hidden', transition: 'all 0.4s ease' }}>
+
+      {/* Contenido de la tarjeta seleccionada */}
+      <div style={{ transition: 'all 0.4s ease' }}>
         {cards.map(card =>
           openCard === card.id ? (
             <div key={card.id} style={{ animation: 'fadeIn 0.5s' }}>
@@ -88,11 +98,19 @@ function App() {
           ) : null
         )}
       </div>
+
+      {/* Animación fadeIn */}
       <style>
         {`
           @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
+          }
+
+          body, html, #root {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
           }
         `}
       </style>
