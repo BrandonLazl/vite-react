@@ -55,10 +55,8 @@ function App() {
         padding: '2rem'
       }}
     >
-      {/* Bienvenido arriba */}
-      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Bienvenido</h1>
+  <h1 style={{ textAlign: 'center', margin: '2rem 0' }}>Bienvenido</h1>
 
-      {/* Tarjetas */}
       <div
         style={{
           display: 'grid',
