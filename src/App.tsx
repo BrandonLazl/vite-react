@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
+import Ventas from './Ventas'
 import Usuarios from './Usuarios'
 import Productos from './Productos'
 
@@ -31,6 +31,12 @@ function App() {
         <h2>Productos</h2>
         <Productos />
       </section>
+
+      <section style={{ marginTop: '2rem' }}>
+  <h2>Ventas</h2>
+  <Ventas />
+</section>
+
 
       <div className="card">
         <button onClick={() => setCount(count + 1)}>
