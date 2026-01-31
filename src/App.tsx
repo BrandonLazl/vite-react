@@ -5,11 +5,7 @@ import './App.css'
 import Ventas from './Ventas'
 import Usuarios from './Usuarios'
 import Productos from './Productos'
-import { DetalleVenta } from './DetalleVenta'
-
-
-
-
+import DetalleVenta from './DetalleVenta'
 
 function App() {
   const [count, setCount] = useState(0)
