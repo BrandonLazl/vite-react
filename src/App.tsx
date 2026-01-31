@@ -10,6 +10,7 @@ import { DetalleVenta } from './DetalleVenta'
 
 
 
+
 function App() {
   const [count, setCount] = useState(0)
 
