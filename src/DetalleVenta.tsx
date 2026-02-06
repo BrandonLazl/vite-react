@@ -3,6 +3,7 @@ import { supabase } from './supabase'
 
 type DetalleVentaType = {
   id: number
+  venta_id: string
   cantidad: number
   precio_unitario: number
   ventas: {
