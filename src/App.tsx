@@ -9,10 +9,10 @@ function App() {
   const [vistaActiva, setVistaActiva] = useState<string | null>(null);
 
   const menu = [
-    { id: 'usuarios', nombre: 'Usuarios'},
-    { id: 'productos', nombre: 'Productos'},
-    { id: 'ventas', nombre: 'Ventas'},
-    { id: 'detalles', nombre: 'Detalle de Ventas'},
+    { id: 'usuarios', nombre: 'Usuarios', icono: '👥' },
+    { id: 'productos', nombre: 'Productos', icono: '📦' },
+    { id: 'ventas', nombre: 'Ventas', icono: '💰' },
+    { id: 'detalles', nombre: 'Detalle de Ventas', icono: '📋' },
   ];
 
   const renderizarTabla = () => {
@@ -28,19 +28,18 @@ function App() {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      backgroundColor: '#ffffff', 
-      color: '#000000',           
+      backgroundColor: '#001f3f', 
+      color: '#ffffff',           
       fontFamily: 'system-ui, sans-serif',
       padding: '2rem' 
     }}>
       
       <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', color: '#000000', marginBottom: '0.5rem' }}>
-          Bienvenido
+        <h1 style={{ fontSize: '2.5rem', color: '#ffffff', marginBottom: '0.5rem' }}>
+          Gestión de Inventario
         </h1>
-        <p style={{ color: '#333333' }}>Equipo 1</p>
+        <p style={{ color: '#cbd5e0' }}>Conectado a Supabase API</p>
       </header>
-
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
@@ -54,31 +53,33 @@ function App() {
             onClick={() => setVistaActiva(item.id)}
             style={{
               padding: '2rem',
-              backgroundColor: '#ffffff',
+              backgroundColor: '#ffffff', 
               borderRadius: '16px',
               cursor: 'pointer',
               textAlign: 'center',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)', 
-              border: vistaActiva === item.id ? '2px solid #000000' : '1px solid #eeeeee',
+              boxShadow: vistaActiva === item.id ? '0 0 20px rgba(255,255,255,0.3)' : '0 4px 12px rgba(0,0,0,0.2)',
+              border: vistaActiva === item.id ? '3px solid #646cff' : '1px solid transparent',
               transition: 'all 0.3s ease',
-              transform: vistaActiva === item.id ? 'scale(1.02)' : 'scale(1)'
+              transform: vistaActiva === item.id ? 'scale(1.05)' : 'scale(1)'
             }}
           >
-            <div style={{ fontSize: '2rem', marginBottom: '1rem' }}></div>
-            <h3 style={{ margin: 0, color: '#000000' }}>{item.nombre}</h3>
+            <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>{item.icono}</div>
+            <h3 style={{ margin: 0, color: '#001f3f' }}>{item.nombre}</h3>
           </div>
         ))}
       </div>
-
       <main style={{ 
         maxWidth: '1100px', 
         margin: '0 auto',
-        backgroundColor: '#ffffff',
-        color: '#000000', 
+        backgroundColor: '#ffffff', 
+        color: '#000000',           
+        borderRadius: '12px',
+        padding: vistaActiva ? '2rem' : '0',
+        minHeight: vistaActiva ? '200px' : '0'
       }}>
         {!vistaActiva ? (
-          <div style={{ textAlign: 'center', padding: '3rem', color: '#666666' }}>
-            <p style={{ fontSize: '1.2rem' }}>Selecciona una tarjeta para ver la información.</p>
+          <div style={{ textAlign: 'center', padding: '3rem', color: '#ffffff' }}>
+            <p style={{ fontSize: '1.2rem' }}>Selecciona una tarjeta para gestionar los datos.</p>
           </div>
         ) : (
           <div>
@@ -87,19 +88,17 @@ function App() {
               justifyContent: 'space-between', 
               alignItems: 'center', 
               marginBottom: '2rem',
-              borderBottom: '1px solid #eee',
+              borderBottom: '1px solid #eeeeee',
               paddingBottom: '1rem'
             }}>
-              <h2 style={{ textTransform: 'capitalize', margin: 0, color: '#000000' }}>
-                Registros: {vistaActiva}
-              </h2>
+              <h2 style={{ margin: 0, color: '#001f3f' }}>Listado de {vistaActiva}</h2>
               <button 
                 onClick={() => setVistaActiva(null)}
                 style={{
-                  backgroundColor: '#333333',
+                  backgroundColor: '#333333', 
                   color: '#ffffff',
                   border: 'none',
-                  padding: '10px 20px',
+                  padding: '10px 25px',
                   borderRadius: '8px',
                   cursor: 'pointer',
                   fontWeight: 'bold'
@@ -109,7 +108,7 @@ function App() {
               </button>
             </div>
             
-            <div style={{ overflowX: 'auto', color: '#000000' }}>
+            <div style={{ overflowX: 'auto' }}>
               {renderizarTabla()}
             </div>
           </div>
