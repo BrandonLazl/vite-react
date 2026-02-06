@@ -26,6 +26,7 @@ export default function DetalleVenta() {
         .from('detalle_venta')
         .select(`
           id,
+          venta_id,
           cantidad,
           precio_unitario,
           ventas (
