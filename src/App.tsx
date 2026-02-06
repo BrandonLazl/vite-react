@@ -9,10 +9,10 @@ function App() {
   const [vistaActiva, setVistaActiva] = useState<string | null>(null);
 
   const menu = [
-    { id: 'usuarios', nombre: 'Usuarios', icono: '👥' },
-    { id: 'productos', nombre: 'Productos', icono: '📦' },
-    { id: 'ventas', nombre: 'Ventas', icono: '💰' },
-    { id: 'detalles', nombre: 'Detalle de Ventas', icono: '📋' },
+    { id: 'usuarios', nombre: 'Usuarios'},
+    { id: 'productos', nombre: 'Productos'},
+    { id: 'ventas', nombre: 'Ventas'},
+    { id: 'detalles', nombre: 'Detalle de Ventas'},
   ];
 
   const renderizarTabla = () => {
@@ -44,7 +44,7 @@ function App() {
           <h1 style={{ fontSize: '2.5rem', color: '#ffffff', margin: '0 0 0.5rem 0' }}>
             Gestión de Inventario
           </h1>
-          <p style={{ color: '#cbd5e0' }}>Conectado a Supabase API</p>
+          <p style={{ color: '#cbd5e0' }}>Bienvenido</p>
         </header>
         <div style={{ 
           display: 'grid', 
@@ -69,7 +69,6 @@ function App() {
                 transform: vistaActiva === item.id ? 'scale(1.05)' : 'scale(1)'
               }}
             >
-              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{item.icono}</div>
               <h3 style={{ margin: 0, color: '#001f3f' }}>{item.nombre}</h3>
             </div>
           ))}
