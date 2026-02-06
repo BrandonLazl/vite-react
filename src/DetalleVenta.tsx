@@ -3,19 +3,19 @@ import { supabase } from './supabase'
 
 type DetalleVentaType = {
   id: number
-  venta_id: string
+  venta_id: string 
   cantidad: number
   precio_unitario: number
   ventas: {
     fecha: string
     usuarios: {
       nombre: string
-    }[]
-  }[]
+    }
+  } 
   producto: {
     tipo: string
     peso: number
-  }[]
+  }
 }
 
 export default function DetalleVenta() {
@@ -27,7 +27,7 @@ export default function DetalleVenta() {
         .from('detalle_venta')
         .select(`
           id,
-          venta_id,
+          venta_id, 
           cantidad,
           precio_unitario,
           ventas (
@@ -43,34 +43,44 @@ export default function DetalleVenta() {
         `)
         .order('id')
 
-      if (error) console.error(error)
-      else setDetalles(data as DetalleVentaType[])
+      if (error) {
+        console.error("Error de Supabase:", error)
+      } else {
+        setDetalles(data as unknown as DetalleVentaType[])
+      }
     }
 
     fetchDetalle()
   }, [])
 
   return (
-    <table border={1} cellPadding={8}>
+    <table border={1} cellPadding={8} style={{ width: '100%', borderCollapse: 'collapse', color: '#000' }}>
       <thead>
-        <tr>
-          <th>Venta</th>
+        <tr style={{ backgroundColor: '#eeeeee' }}>
+          <th>UUID Venta</th>
+          <th>Cliente</th>
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Precio Unitario</th>
+          <th>Total</th>
+          <th>Fecha</th>
         </tr>
       </thead>
       <tbody>
         {detalles.map(d => (
           <tr key={d.id}>
-            <td>{d.ventas[0]?.usuarios[0]?.nombre}</td>
+            <td style={{ fontSize: '0.75rem', fontFamily: 'monospace' }}>{d.venta_id}</td>
+            <td>{d.ventas?.usuarios?.nombre || 'N/A'}</td>
+            
             <td>
-              {d.producto[0]?.tipo} ({d.producto[0]?.peso}kg)
+              {d.producto?.tipo} ({d.producto?.peso}kg)
             </td>
+            
             <td>{d.cantidad}</td>
-            <td>${d.precio_unitario.toFixed(2)}</td>
+            <td>${d.precio_unitario?.toFixed(2)}</td>
             <td>${(d.cantidad * d.precio_unitario).toFixed(2)}</td>
-            <td>{new Date(d.ventas[0]?.fecha).toLocaleString()}</td>
+            
+            <td>{d.ventas?.fecha ? new Date(d.ventas.fecha).toLocaleDateString() : '---'}</td>
           </tr>
         ))}
       </tbody>
