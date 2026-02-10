@@ -21,39 +21,20 @@ type Venta = {
 
 export default function Ventas() {
   const [ventas, setVentas] = useState<Venta[]>([])
-
-  useEffect(() => {
-    const fetchVentas = async () => {
-      const { data, error } = await supabase
-        .from('ventas')
-        .select(`
-          id,
-          usuario_id, 
-          total,
-          fecha,
-          usuarios (
-            nombre
-          ),
-          detalle_venta (
-            cantidad,
-            precio_unitario,
-            producto (
-              tipo,
-              peso
-            )
-          )
-        `)
-        .order('fecha', { ascending: false })
-
-      if (error) {
-        console.error(error)
-      } else {
-        setVentas(data as unknown as Venta[])
-      }
+  
+useEffect(() => {
+  const fetchVentas = async () => {
+    try {
+      const res = await fetch('https://backend-aranza.vercel.app/api/ventas')
+      const data = await res.json()
+      setVentas(data)
+    } catch (err) {
+      console.error(err)
     }
+  }
 
-    fetchVentas()
-  }, [])
+  fetchVentas()
+}, [])
 
   return (
     <table border={1} cellPadding={8} style={{ width: '100%', borderCollapse: 'collapse', color: '#000' }}>
